@@ -17,13 +17,15 @@
 
   </script>
 
-<div class="max-w-5xl mx-auto md:mt-28">
     {#if $user}
         <CalcRow row={data.standardFeesGroup} />
         <CalcRow row={data.demolitionGroup} />
         <CalcRow row={data.equipmentChargesGroup} />
         <CalcRow row={data.specialtyItemsGroup} />
+        <CalcRow row={data.extraFeesGroup} />
+        <button class="block text-2xl hover:opacity-80 bg-mainColor rounded-md mx-auto p-4 md:mt-20 mt-6 md:mb-20 mb-10">
+            Get Total
+        </button>
     {:else}
         <Auth />
     {/if}
-  </div>
