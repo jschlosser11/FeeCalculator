@@ -19,13 +19,11 @@ export async function load(event) {
         let equipmentChargesGroup = prices.filter(prices => prices.group === 'equipmentCharges');
         let specialtyItemsGroup = prices.filter(prices => prices.group === 'specialtyItems');
 
-        console.log('Standard Fees', standardFeesGroup);
-        console.log('Demolition', demolitionGroup);
-        console.log('Equipment Charges', equipmentChargesGroup);
-        console.log('Specialty Items', specialtyItemsGroup);
-
         return {
-            prices
+            standardFeesGroup,
+            demolitionGroup,
+            equipmentChargesGroup,
+            specialtyItemsGroup
         };
     }
 

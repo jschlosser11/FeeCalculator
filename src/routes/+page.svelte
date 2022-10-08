@@ -8,7 +8,6 @@
     export let data;
 
     console.log('PAGE DATA', data);
-    //console.log('Sorted DATA', result);
 
     user.set(supabase.auth.user())
 
@@ -20,9 +19,10 @@
 
 <div class="max-w-5xl mx-auto md:mt-28">
     {#if $user}
-        {#each data.prices as row}
-            <CalcRow {row} />
-        {/each}
+        <CalcRow row={data.standardFeesGroup} />
+        <CalcRow row={data.demolitionGroup} />
+        <CalcRow row={data.equipmentChargesGroup} />
+        <CalcRow row={data.specialtyItemsGroup} />
     {:else}
         <Auth />
     {/if}
