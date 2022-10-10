@@ -1,6 +1,5 @@
 <script>
-	import { each } from "svelte/internal";
-
+    import { each } from "svelte/internal";
 
     export let amount;
     export let item;
@@ -8,6 +7,7 @@
     let threeDayTotal = "";
     let fiveDayTotal = "";
     let daysSelected;
+    let checked = false;
 
     let amountCalc = () => {
         amountTotal = amount * item.price;
@@ -28,9 +28,14 @@
     <p class="text-lg md:text-center h-14 pb-6">{item.title}</p>
     <div class="flex md:justify-center h-14">
         {#if item.type == 'checkbox'}
-            <div class="pb-6">
-                <input value="{item.price}" type={item.type}/>
-            </div>
+        <label class="pb-6">
+            <input class="h-6 w-6" type="checkbox" bind:checked={checked}>
+        </label>
+        {#if checked}
+            <p>{item.price}</p>
+        {:else}
+            <p>0</p>
+        {/if}
         {:else if item.type == 'qty'}
             <div class="flex md:justify-center pb-6">
                 <input class="input border-b border-b-gray-400" type="number" placeholder="0" bind:value={amount}/>
@@ -89,7 +94,7 @@
             <p class="hidden"></p>
         {/if}
 
-    {:else if daysDropdown == '3'}
+    {:else if day == '3'}
             <button on:click={threeDayCalc} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
                 Get Total
             </button>
@@ -99,7 +104,7 @@
                 <p class="hidden"></p>
             {/if}
 
-    {:else if daysDropdown == '5'}
+    {:else if day == '5'}
         <button on:click={fiveDayCalc} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
                 Get Total
         </button>
