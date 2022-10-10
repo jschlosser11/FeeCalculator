@@ -8,6 +8,7 @@
     let fiveDayTotal = "";
     let daysSelected;
     let checked = false;
+    let daysDropdown = [3, 5];
 
     let amountCalc = () => {
         amountTotal = amount * item.price;
@@ -20,8 +21,6 @@
     let fiveDayCalc = () => {
         fiveDayTotal = amount * item.price * 5;
     }
-
-    let daysDropdown = [3, 5]
 </script>
 
 <div class="md:pl-0 pl-3 md:border-none border-b border-b-cyan-400 md:p-0 mb-6">
@@ -53,34 +52,34 @@
             </div>
         {:else if item.type == 'days'}
             <div class="flex md:justify-center pb-6">
-                <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
                 <select class="pl-4" bind:value={daysDropdown} id="days">
                     {#each daysDropdown as day}
                             <option value={day}>{day}</option>
                     {/each}
                 </select>
+                <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
             </div>
         {:else if item.type == 'qtyDays'}
         <div class="flex md:justify-center pb-6">
             <input type="number" class="input border-b border-b-gray-400" placeholder="0" bind:value={amount} />
                 <label class="bg-mainColor px-2" for="units">qty</label>
-                <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
-                <select class="pl-4" bind:value={daysDropdown} id="qtyDays">
-                    {#each daysDropdown as day}
+                    <select class="pl-4" bind:value={daysDropdown} id="qtyDays">
+                        {#each daysDropdown as day}
                         <option value={day}>{day}</option>
-                    {/each}
-                </select>
-        </div>
+                        {/each}
+                    </select>
+                    <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
+            </div>
         {:else if item.type == 'sqftDays'}
         <div class="flex md:justify-center pb-6">
             <input type="number" class="input border-b border-b-gray-400" placeholder="0" bind:value={amount} />
                 <label class="bg-mainColor px-2" for="units">sqft</label>
-                <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
-                <select class="pl-4" bind:value={daysDropdown} id="qtyDays">
-                    {#each daysDropdown as day}
+                    <select class="pl-4" bind:value={daysDropdown} id="qtyDays">
+                        {#each daysDropdown as day}
                         <option value={day}>{day}</option>
-                    {/each}
-                </select>
+                        {/each}
+                    </select>
+                    <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
         </div>
         {/if}
     </div>
