@@ -1,25 +1,48 @@
 <script>
     import { each } from "svelte/internal";
+    import { createEventDispatcher } from 'svelte';
 
-    export let amount;
+    const dispatch = createEventDispatcher();
+
+    let amount;
     export let item;
-    let amountTotal = "";
-    let threeDayTotal = "";
-    let fiveDayTotal = "";
+    export let amountTotal = "";
+
+    if(item.type == 'checkbox') {console.log('ITEM', item)}
+
     let daysSelected;
     let checked = false;
     let daysDropdown = [3, 5];
 
-    let amountCalc = () => {
-        amountTotal = amount * item.price;
-    }
+    let amountCalc = (numberOfDays) => {
+        // if Checkbox do this
+        if(item.type == 'checkbox') {
+            if(item.price && checked) {
+                amountTotal = 1 * item.price;
+            } else {
+                // DO SOME SPECIAL STUFF HERE;
+                return ;
+            }
+        }
+        // else do this
+        else {
+            if (numberOfDays && amount) {
+                console.log('DAYS SELECTED', numberOfDays);
+                amountTotal = amount * item.price * numberOfDays;
+            } else if (numberOfDays) {
+                amountTotal = numberOfDays * item.price;
+            } else {
+                console.log('DAYS SELECTED', numberOfDays);
+                amountTotal = amount * item.price;
+            }
+        }
 
-    let threeDayCalc = () => {
-        threeDayTotal = amount * item.price * 3;
-    }
+        // Broadcast total change
+        dispatch('totalUpdated', {
+            total: amountTotal,
+            id: item.id
+		});
 
-    let fiveDayCalc = () => {
-        fiveDayTotal = amount * item.price * 5;
     }
 </script>
 
@@ -28,13 +51,8 @@
     <div class="flex md:justify-center h-14">
         {#if item.type == 'checkbox'}
         <label class="pb-6">
-            <input class="h-6 w-6" type="checkbox" bind:checked={checked}>
+            <input class="h-6 w-6" type="checkbox" bind:checked={checked} bind:value={item.price}>
         </label>
-        {#if checked}
-            <p>{item.price}</p>
-        {:else}
-            <p>0</p>
-        {/if}
         {:else if item.type == 'qty'}
             <div class="flex md:justify-center pb-6">
                 <input class="input border-b border-b-gray-400" type="number" placeholder="0" bind:value={amount}/>
@@ -52,9 +70,9 @@
             </div>
         {:else if item.type == 'days'}
             <div class="flex md:justify-center pb-6">
-                <select class="pl-4" bind:value={daysDropdown} id="days">
+                <select class="pl-4" bind:value={daysSelected} id="days">
                     {#each daysDropdown as day}
-                            <option value={day}>{day}</option>
+                        <option value={day}>{day}</option>
                     {/each}
                 </select>
                 <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
@@ -63,28 +81,28 @@
         <div class="flex md:justify-center pb-6">
             <input type="number" class="input border-b border-b-gray-400" placeholder="0" bind:value={amount} />
                 <label class="bg-mainColor px-2" for="units">qty</label>
-                    <select class="pl-4" bind:value={daysDropdown} id="qtyDays">
-                        {#each daysDropdown as day}
+                <select class="pl-4" bind:value={daysSelected} id="qtyDays">
+                    {#each daysDropdown as day}
                         <option value={day}>{day}</option>
-                        {/each}
-                    </select>
-                    <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
+                    {/each}
+                </select>
+                <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
             </div>
         {:else if item.type == 'sqftDays'}
         <div class="flex md:justify-center pb-6">
             <input type="number" class="input border-b border-b-gray-400" placeholder="0" bind:value={amount} />
-                <label class="bg-mainColor px-2" for="units">sqft</label>
-                    <select class="pl-4" bind:value={daysDropdown} id="qtyDays">
-                        {#each daysDropdown as day}
-                        <option value={day}>{day}</option>
-                        {/each}
-                    </select>
-                    <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
+            <label class="bg-mainColor px-2" for="units">sqft</label>
+            <select class="pl-4" bind:value={daysSelected} id="qtyDays">
+                {#each daysDropdown as day}
+                    <option value={day}>{day}</option>
+                {/each}
+            </select>
+            <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
         </div>
         {/if}
     </div>
-    <!-- {#if item.type == 'qty' || 'sqft'}
-        <button on:click={amountCalc} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
+
+        <button on:click={amountCalc(daysSelected)} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
             Get Total
         </button>
         {#if amountTotal}
@@ -93,26 +111,7 @@
             <p class="hidden"></p>
         {/if}
 
-    {:else if day == '3'}
-            <button on:click={threeDayCalc} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
-                Get Total
-            </button>
-            {#if threeDayTotal}
-                <p class="md:text-center md:mb-4 mb-10">${threeDayTotal}</p>
-            {:else}
-                <p class="hidden"></p>
-            {/if}
 
-    {:else if day == '5'}
-        <button on:click={fiveDayCalc} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
-                Get Total
-        </button>
-        {#if fiveDayTotal}
-            <p class="md:text-center md:mb-4 mb-10">${fiveDayTotal}</p>
-        {:else}
-            <p class="hidden"></p>
-        {/if}
-    {/if} -->
 </div>
 
 <style>
