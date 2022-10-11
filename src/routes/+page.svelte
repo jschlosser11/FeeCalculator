@@ -13,7 +13,7 @@
     $: equipmentChargesTotal = 0;
     $: specialtyItemsTotal = 0;
     $: extraFeesTotal = 0;
-    $: totalTotal = standardFeesTotal + demolitionTotal + equipmentChargesTotal + specialtyItemsTotal + extraFeesTotal;
+    $: totalTotal = Math.floor(standardFeesTotal + demolitionTotal + equipmentChargesTotal + specialtyItemsTotal + extraFeesTotal);
 
     $: console.log('TOTAL TOTAL', totalTotal);
 
@@ -57,7 +57,7 @@
         <CalcRow row={data.equipmentChargesGroup} rowGroup={'equipmentChargesGroup'} on:rowTotalUpdated={handleTotal} />
         <CalcRow row={data.specialtyItemsGroup} rowGroup={'specialtyItemsGroup'} on:rowTotalUpdated={handleTotal} />
         <CalcRow row={data.extraFeesGroup} rowGroup={'extraFeesGroup'} on:rowTotalUpdated={handleTotal} />
-        <h1 class="flex justify-center text-5xl bold mb-20 mt-20">Total: {totalTotal}</h1>
+        <h1 class="flex justify-center text-5xl bold mb-20 mt-20">Total: ${totalTotal}</h1>
     {:else}
         <Auth />
     {/if}

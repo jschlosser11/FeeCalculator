@@ -8,7 +8,6 @@
     export let item;
     export let amountTotal = "";
 
-    if(item.type == 'checkbox') {console.log('ITEM', item)}
 
     let daysSelected;
     let checked = false;
@@ -103,13 +102,8 @@
     </div>
 
         <button on:click={amountCalc(daysSelected)} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
-            Get Total
+            Add
         </button>
-        {#if amountTotal}
-            <p class="md:text-center md:mb-4 mb-10">${amountTotal}</p>
-        {:else}
-            <p class="hidden"></p>
-        {/if}
 
 
 </div>
