@@ -11,7 +11,7 @@
 
     let daysSelected;
     let checked = false;
-    let daysDropdown = [3, 5];
+    let daysDropdown = ["Select # of Days",3, 5];
 
     let amountCalc = (numberOfDays) => {
         // if Checkbox do this
@@ -20,6 +20,7 @@
                 amountTotal = 1 * item.price;
             } else {
                 // DO SOME SPECIAL STUFF HERE;
+                
                 return ;
             }
         }
@@ -54,56 +55,65 @@
         </label>
         {:else if item.type == 'qty'}
             <div class="flex md:justify-center pb-6">
-                <input class="input border-b border-b-gray-400" type="number" placeholder="0" bind:value={amount}/>
-                <label class="bg-mainColor px-2" for="{item.type}">{item.type}</label>
+                <input class="input border-b border-b-cyan-400" type="number" placeholder="0" bind:value={amount}/>
+                <label class="bg-mainColor px-2 flex items-center" for="{item.type}">{item.type}</label>
             </div>
         {:else if item.type == 'sqft'}
             <div class="flex md:justify-center pb-6">
-                <input class="input border-b border-b-gray-400" type="number" placeholder="0" bind:value={amount}/>
-                <label class="bg-mainColor px-2" for="{item.type}">{item.type}</label>
+                <input class="input border-b border-b-cyan-400" type="number" placeholder="0" bind:value={amount}/>
+                <label class="bg-mainColor px-2 flex items-center" for="{item.type}">{item.type}</label>
             </div>
             {:else if item.type == 'hrs'}
             <div class="flex md:justify-center pb-6">
-                <input class="input border-b border-b-gray-400" type="number" placeholder="0" bind:value={amount}/>
-                <label class="bg-mainColor px-2" for="{item.type}">{item.type}</label>
+                <input class="input border-b border-b-cyan-400" type="number" placeholder="0" bind:value={amount}/>
+                <label class="bg-mainColor px-2 flex items-center" for="{item.type}">{item.type}</label>
             </div>
         {:else if item.type == 'days'}
             <div class="flex md:justify-center pb-6">
-                <select class="pl-4" bind:value={daysSelected} id="days">
+                <select class="border border-cyan-400 ml-4" bind:value={daysSelected} id="days">
                     {#each daysDropdown as day}
                         <option value={day}>{day}</option>
                     {/each}
                 </select>
-                <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
+                <label class="bg-mainColor px-2 flex items-center" for="qtyDays">days</label>
             </div>
         {:else if item.type == 'qtyDays'}
         <div class="flex md:justify-center pb-6">
-            <input type="number" class="input border-b border-b-gray-400" placeholder="0" bind:value={amount} />
-                <label class="bg-mainColor px-2" for="units">qty</label>
-                <select class="pl-4" bind:value={daysSelected} id="qtyDays">
+            <input type="number" class="input border-b border-cyan-400" placeholder="0" bind:value={amount} />
+                <label class="bg-mainColor px-2 flex items-center" for="units">qty</label>
+                <select class="border border-cyan-400 ml-4" bind:value={daysSelected} id="qtyDays">
                     {#each daysDropdown as day}
                         <option value={day}>{day}</option>
                     {/each}
                 </select>
-                <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
+                <label class="bg-mainColor px-2 flex items-center" for="qtyDays">days</label>
             </div>
         {:else if item.type == 'sqftDays'}
         <div class="flex md:justify-center pb-6">
             <input type="number" class="input border-b border-b-gray-400" placeholder="0" bind:value={amount} />
-            <label class="bg-mainColor px-2" for="units">sqft</label>
-            <select class="pl-4" bind:value={daysSelected} id="qtyDays">
+            <label class="bg-mainColor px-2 flex items-center" for="units">sqft</label>
+            <select class="border border-cyan-400 ml-4 w-fit" bind:value={daysSelected} id="qtyDays">
                 {#each daysDropdown as day}
                     <option value={day}>{day}</option>
                 {/each}
             </select>
-            <label class="bg-mainColor px-2 ml-2" for="qtyDays">days</label>
+            <label class="bg-mainColor px-2 flex items-center" for="qtyDays">days</label>
         </div>
         {/if}
     </div>
 
+    {#if amount}
+    <button on:click={amountCalc(daysSelected)} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
+        Add
+    </button>
+    {:else if checked}
         <button on:click={amountCalc(daysSelected)} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
             Add
         </button>
+    {:else}
+        <button class="hidden"></button>
+    {/if}
+        
 
 
 </div>
@@ -115,10 +125,11 @@
         margin: 0;
     }
 
-    .input:focus{
+    .input:focus, select:focus {
         outline: none;
     }
 
+  
     .input {
         display: block;
         font: inherit;

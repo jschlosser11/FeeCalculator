@@ -3,7 +3,6 @@
     import { supabase } from '$lib/supabaseClient'
     import Auth from '$lib/Auth.svelte'
     import CalcRow from '../components/CalcRow.svelte'
-    // import CalcContainer from '../components/CalcContainer.svelte'
 
     export let data;
 
@@ -57,7 +56,7 @@
         <CalcRow row={data.equipmentChargesGroup} rowGroup={'equipmentChargesGroup'} on:rowTotalUpdated={handleTotal} />
         <CalcRow row={data.specialtyItemsGroup} rowGroup={'specialtyItemsGroup'} on:rowTotalUpdated={handleTotal} />
         <CalcRow row={data.extraFeesGroup} rowGroup={'extraFeesGroup'} on:rowTotalUpdated={handleTotal} />
-        <h1 class="flex justify-center text-5xl bold mb-20 mt-20">Total: ${totalTotal}</h1>
+        <h1 class="flex justify-center md:text-5xl text-2xl bold mb-20 mt-4 fixed top-0 right-0 p-4 bg-green-700 shadow-md shadow-black text-white z-20">Total: ${totalTotal}</h1>
     {:else}
         <Auth />
     {/if}

@@ -9,6 +9,7 @@
     export let rowTotal = 0;
     export let rowGroup;
 
+    // console.log("ROW TOTAL", rowTotal);
     $: formattedRow = row.map((element) => {
         element.currentTotal = 0;
     });
@@ -22,7 +23,7 @@
 
     let handleTotal = (event) => {
 
-        $: row.map((element) => {
+         row.map((element) => {
             if (event.detail.id == element.id) {
                 element.currentTotal = event.detail.total
             }
@@ -46,7 +47,7 @@
         <div class="mb-10">
             <h2 class="text-3xl tracking-wider md:text-center md:pl-0 pl-3 text-white bg-mainColor py-4 uppercase">{row[0].group}</h2>
         </div>
-        <div class="grid grid-cols-{length} mb-8">
+        <div class="grid grid-cols-{length} md:mb-28 mb-0">
             <div class="md:flex md:justify-center px-6 gap-20">
             {#each row as item}
                 <CalcCard {item} on:totalUpdated={handleTotal} />
