@@ -8,19 +8,26 @@
     export let row;
     export let rowTotal = 0;
     export let rowGroup;
+     let currentTotal = 0;
 
-    // console.log("ROW TOTAL", rowTotal);
+    
     $: formattedRow = row.map((element) => {
         element.currentTotal = 0;
     });
 
     let updateRowTotal = () => {
         rowTotal = 0;
-        row.map((element) => {
-            rowTotal += element.currentTotal;
-        })
+        if(currentTotal === 0) {
+            row.map((element) => {
+                rowTotal += element.currentTotal;
+            })
+        }
+        else {
+            row.map((element) => {
+                rowTotal -= element.currentTotal;
+            })
+        }
     }
-
     let handleTotal = (event) => {
 
          row.map((element) => {
@@ -29,7 +36,8 @@
             }
         });
 
-        updateRowTotal();
+        console.log("NEW", updateRowTotal())
+
 
         // Broadcast total change
         dispatch('rowTotalUpdated', {
@@ -40,7 +48,6 @@
 	};
 
     $: length = row.length
-
 </script>
 <div class="max-w-7xl mx-auto md:mt-28">
     <div class="shadow-xl shadow-gray-400">

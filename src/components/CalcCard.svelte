@@ -8,10 +8,37 @@
     export let item;
     export let amountTotal = "";
 
-
+    let btnClicked = false;
     let daysSelected;
+    
     let checked = false;
-    let daysDropdown = ["Select # of Days", 1, 3, 5];
+    let daysDropdown = [1, 3, 5];
+
+    let removeAmountCalc = (numberOfDays) => {
+        if(item.type == 'checkbox') {
+            if(item.price && checked) {
+                amountTotal = (amountTotal - item.price) * 1;
+
+            } else {
+                // DO SOME SPECIAL STUFF HERE;
+                
+                return ;
+            }
+        }
+        // else do this
+        else {
+            amountTotal = 0;
+        }
+
+        // Broadcast total change
+        dispatch('totalUpdated', {
+            total: amountTotal,
+            id: item.id
+		});
+
+        amount = "";
+         btnClicked = false;
+    }
 
     let amountCalc = (numberOfDays) => {
         // if Checkbox do this
@@ -44,7 +71,7 @@
             id: item.id
 		});
 
-       
+       btnClicked = true;
 
     }
 </script>
@@ -74,6 +101,7 @@
         {:else if item.type == 'days'}
             <div class="flex md:justify-center pb-6">
                 <select class="border border-cyan-400 ml-4" bind:value={daysSelected} id="days">
+                    <option value=0>Select # of days</option>
                     {#each daysDropdown as day}
                         <option value={day}>{day}</option>
                     {/each}
@@ -85,6 +113,7 @@
             <input type="number" class="input border-b border-cyan-400" placeholder="0" bind:value={amount} />
                 <label class="bg-mainColor px-2 flex items-center" for="units">qty</label>
                 <select class="border border-cyan-400 ml-4" bind:value={daysSelected} id="qtyDays">
+                    <option value=0>Select # of days</option>
                     {#each daysDropdown as day}
                         <option value={day}>{day}</option>
                     {/each}
@@ -96,6 +125,7 @@
             <input type="number" class="input border-b border-b-gray-400" placeholder="0" bind:value={amount} />
             <label class="bg-mainColor px-2 flex items-center" for="units">sqft</label>
             <select class="border border-cyan-400 ml-4 w-fit" bind:value={daysSelected} id="qtyDays">
+                <option value=0>Select # of days</option>
                 {#each daysDropdown as day}
                     <option value={day}>{day}</option>
                 {/each}
@@ -106,13 +136,20 @@
     </div>
 
     {#if amount || checked || item.type === 'days'}
-    <button on:click={amountCalc(daysSelected)} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
-        Confirm
-    </button>
+        {#if !btnClicked}
+            <button on:click={amountCalc(daysSelected)} class="block  hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
+                Confirm
+            </button>
+        {:else if btnClicked}
+            <button on:click={removeAmountCalc(daysSelected)} class="block  hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
+                Delete
+            </button>
+        {/if}
     {:else}
         <button class="hidden"></button>
     {/if}
         
+    
 
 
 </div>

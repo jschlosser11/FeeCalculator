@@ -12,7 +12,7 @@
     $: equipmentChargesTotal = 0;
     $: specialtyItemsTotal = 0;
     $: testingFeesTotal = 0;
-    $: totalTotal = Math.floor(standardFeesTotal + demolitionTotal + equipmentChargesTotal + specialtyItemsTotal + testingFeesTotal);
+    $: totalTotal = (standardFeesTotal + demolitionTotal + equipmentChargesTotal + specialtyItemsTotal + testingFeesTotal).toFixed(2);
 
     $: console.log('TOTAL TOTAL', totalTotal);
 
