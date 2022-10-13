@@ -88,6 +88,11 @@
                 <input class="input border-b border-b-cyan-400" type="number" placeholder="0" bind:value={amount}/>
                 <label class="bg-mainColor px-2 flex items-center" for="{item.type}">{item.type}</label>
             </div>
+        {:else if item.type == 'inft'}
+            <div class="flex lg:justify-center pb-6">
+                <input class="input border-b border-b-cyan-400" type="number" placeholder="0" bind:value={amount}/>
+                <label class="bg-mainColor px-2 flex items-center" for="{item.type}">{item.type}</label>
+            </div>
         {:else if item.type == 'sqft'}
             <div class="flex lg:justify-center pb-6">
                 <input class="input border-b border-b-cyan-400" type="number" placeholder="0" bind:value={amount}/>

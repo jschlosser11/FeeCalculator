@@ -55,7 +55,7 @@
             <h2 class="text-3xl tracking-wider lg:text-center lg:pl-0 pl-3 text-white bg-mainColor py-4 uppercase">{row[0].group}</h2>
         </div>
         <div class="grid grid-cols-{length} lg:mb-28 mb-0">
-            <div class="lg:flex lg:justify-center px-6 gap-20">
+            <div class="lg:flex lg:flex-wrap lg:justify-center px-6 gap-20">
             {#each row as item}
                 <CalcCard {item} on:totalUpdated={handleTotal} />
             {/each}
