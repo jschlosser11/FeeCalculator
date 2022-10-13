@@ -142,11 +142,11 @@
 
     {#if amount || checked || item.type === 'days'}
         {#if !btnClicked}
-            <button on:click={amountCalc(daysSelected)} class="block  hover:opacity-80 bg-mainColor rounded-md lg:mx-auto p-2 lg:mb-4 mb-10">
+            <button on:click={amountCalc(daysSelected)} class="block  hover:opacity-80 bg-mainColor text-white rounded-md lg:mx-auto p-2 lg:mb-4 mb-10">
                 Confirm
             </button>
         {:else if btnClicked}
-            <button on:click={removeAmountCalc(daysSelected)} class="block  hover:opacity-80 bg-mainColor rounded-md lg:mx-auto p-2 lg:mb-4 mb-10">
+            <button on:click={removeAmountCalc(daysSelected)} class="block text-white hover:opacity-80 bg-red-600 rounded-md lg:mx-auto p-2 lg:mb-4 mb-10">
                 Delete
             </button>
         {/if}
