@@ -76,30 +76,30 @@
     }
 </script>
 
-<div class="md:pl-0 pl-3 md:border-none border-b border-b-cyan-400 md:p-0 mb-6">
-    <p class="text-lg md:text-center h-14 pb-6">{item.title}</p>
-    <div class="flex md:justify-center h-14">
+<div class="lg:pl-0 pl-3 lg:border-none border-b border-b-cyan-400 lg:p-0 mb-6">
+    <p class="text-lg lg:text-center h-14 pb-6">{item.title}</p>
+    <div class="flex lg:justify-center h-14">
         {#if item.type == 'checkbox'}
         <label class="pb-6">
             <input class="h-6 w-6" type="checkbox" bind:checked={checked} bind:value={item.price}>
         </label>
         {:else if item.type == 'qty'}
-            <div class="flex md:justify-center pb-6">
+            <div class="flex lg:justify-center pb-6">
                 <input class="input border-b border-b-cyan-400" type="number" placeholder="0" bind:value={amount}/>
                 <label class="bg-mainColor px-2 flex items-center" for="{item.type}">{item.type}</label>
             </div>
         {:else if item.type == 'sqft'}
-            <div class="flex md:justify-center pb-6">
+            <div class="flex lg:justify-center pb-6">
                 <input class="input border-b border-b-cyan-400" type="number" placeholder="0" bind:value={amount}/>
                 <label class="bg-mainColor px-2 flex items-center" for="{item.type}">{item.type}</label>
             </div>
             {:else if item.type == 'hrs'}
-            <div class="flex md:justify-center pb-6">
+            <div class="flex lg:justify-center pb-6">
                 <input class="input border-b border-b-cyan-400" type="number" placeholder="0" bind:value={amount}/>
                 <label class="bg-mainColor px-2 flex items-center" for="{item.type}">{item.type}</label>
             </div>
         {:else if item.type == 'days'}
-            <div class="flex md:justify-center pb-6">
+            <div class="flex lg:justify-center pb-6">
                 <select class="border border-cyan-400 ml-4" bind:value={daysSelected} id="days">
                     <option value=0>Select # of days</option>
                     {#each daysDropdown as day}
@@ -109,7 +109,7 @@
                 <label class="bg-mainColor px-2 flex items-center" for="qtyDays">days</label>
             </div>
         {:else if item.type == 'qtyDays'}
-        <div class="flex md:justify-center pb-6">
+        <div class="flex lg:justify-center pb-6">
             <input type="number" class="input border-b border-cyan-400" placeholder="0" bind:value={amount} />
                 <label class="bg-mainColor px-2 flex items-center" for="units">qty</label>
                 <select class="border border-cyan-400 ml-4" bind:value={daysSelected} id="qtyDays">
@@ -121,7 +121,7 @@
                 <label class="bg-mainColor px-2 flex items-center" for="qtyDays">days</label>
             </div>
         {:else if item.type == 'sqftDays'}
-        <div class="flex md:justify-center pb-6">
+        <div class="flex lg:justify-center pb-6">
             <input type="number" class="input border-b border-b-gray-400" placeholder="0" bind:value={amount} />
             <label class="bg-mainColor px-2 flex items-center" for="units">sqft</label>
             <select class="border border-cyan-400 ml-4 w-fit" bind:value={daysSelected} id="qtyDays">
@@ -137,11 +137,11 @@
 
     {#if amount || checked || item.type === 'days'}
         {#if !btnClicked}
-            <button on:click={amountCalc(daysSelected)} class="block  hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
+            <button on:click={amountCalc(daysSelected)} class="block  hover:opacity-80 bg-mainColor rounded-md lg:mx-auto p-2 lg:mb-4 mb-10">
                 Confirm
             </button>
         {:else if btnClicked}
-            <button on:click={removeAmountCalc(daysSelected)} class="block  hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
+            <button on:click={removeAmountCalc(daysSelected)} class="block  hover:opacity-80 bg-mainColor rounded-md lg:mx-auto p-2 lg:mb-4 mb-10">
                 Delete
             </button>
         {/if}
