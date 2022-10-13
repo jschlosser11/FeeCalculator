@@ -107,7 +107,7 @@
 
     {#if amount || checked || item.type === 'days'}
     <button on:click={amountCalc(daysSelected)} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
-        Add
+        Confirm
     </button>
     {:else}
         <button class="hidden"></button>

@@ -1,7 +1,7 @@
 <script>
     import { user, total } from '$lib/sessionStore'
     import { supabase } from '$lib/supabaseClient'
-    import Auth from '$lib/Auth.svelte'
+    // import Auth from '$lib/Auth.svelte'
     import CalcRow from '../components/CalcRow.svelte'
 
     export let data;
@@ -50,13 +50,13 @@
 
   </script>
 
-    {#if $user}
+    <!-- {#if $user} -->
         <CalcRow row={data.standardFeesGroup} rowGroup={'standardFeesGroup'} on:rowTotalUpdated={handleTotal} />
         <CalcRow row={data.demolitionGroup} rowGroup={'demolitionGroup'} on:rowTotalUpdated={handleTotal} />
         <CalcRow row={data.equipmentChargesGroup} rowGroup={'equipmentChargesGroup'} on:rowTotalUpdated={handleTotal} />
         <CalcRow row={data.specialtyItemsGroup} rowGroup={'specialtyItemsGroup'} on:rowTotalUpdated={handleTotal} />
         <CalcRow row={data.testingFeesGroup} rowGroup={'testingFeesGroup'} on:rowTotalUpdated={handleTotal} />
         <h1 class="flex justify-center md:text-5xl text-2xl bold mb-20 mt-4 fixed top-0 right-0 p-4 bg-green-700 shadow-md shadow-black text-white z-20">Total: ${totalTotal}</h1>
-    {:else}
-        <Auth />
-    {/if}
+    <!-- {:else} -->
+        <!-- <Auth /> -->
+    <!-- {/if} -->
