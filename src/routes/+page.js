@@ -5,7 +5,7 @@ export let standardFeesGroup;
 export let demolitionGroup;
 export let equipmentChargesGroup;
 export let specialtyItemsGroup;
-export let extraFeesGroup;
+export let testingFeesGroup;
 
 /** @type {import('./$types').PageLoad} */
 export async function load(event) {
@@ -19,7 +19,7 @@ export async function load(event) {
         let demolitionGroup = prices.filter(prices => prices.group === 'demolition');
         let equipmentChargesGroup = prices.filter(prices => prices.group === 'Equipment Charges');
         let specialtyItemsGroup = prices.filter(prices => prices.group === 'Specialty Items');
-        let extraFeesGroup = prices.filter(prices => prices.group === 'Extra Fees');
+        let testingFeesGroup = prices.filter(prices => prices.group === 'Testing Fees');
 
 
         console.log('StandardFees:', standardFeesGroup);
@@ -29,7 +29,7 @@ export async function load(event) {
             demolitionGroup,
             equipmentChargesGroup,
             specialtyItemsGroup,
-            extraFeesGroup
+            testingFeesGroup
         };
     }
 

@@ -11,13 +11,14 @@
 
     let daysSelected;
     let checked = false;
-    let daysDropdown = ["Select # of Days",3, 5];
+    let daysDropdown = ["Select # of Days", 1, 3, 5];
 
     let amountCalc = (numberOfDays) => {
         // if Checkbox do this
         if(item.type == 'checkbox') {
             if(item.price && checked) {
                 amountTotal = 1 * item.price;
+
             } else {
                 // DO SOME SPECIAL STUFF HERE;
                 
@@ -42,6 +43,8 @@
             total: amountTotal,
             id: item.id
 		});
+
+       
 
     }
 </script>
@@ -102,14 +105,10 @@
         {/if}
     </div>
 
-    {#if amount}
+    {#if amount || checked || item.type === 'days'}
     <button on:click={amountCalc(daysSelected)} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
         Add
     </button>
-    {:else if checked}
-        <button on:click={amountCalc(daysSelected)} class="block hover:opacity-80 bg-mainColor rounded-md md:mx-auto p-2 md:mb-4 mb-10">
-            Add
-        </button>
     {:else}
         <button class="hidden"></button>
     {/if}

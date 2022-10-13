@@ -11,8 +11,8 @@
     $: demolitionTotal = 0;
     $: equipmentChargesTotal = 0;
     $: specialtyItemsTotal = 0;
-    $: extraFeesTotal = 0;
-    $: totalTotal = Math.floor(standardFeesTotal + demolitionTotal + equipmentChargesTotal + specialtyItemsTotal + extraFeesTotal);
+    $: testingFeesTotal = 0;
+    $: totalTotal = Math.floor(standardFeesTotal + demolitionTotal + equipmentChargesTotal + specialtyItemsTotal + testingFeesTotal);
 
     $: console.log('TOTAL TOTAL', totalTotal);
 
@@ -38,8 +38,8 @@
             case "specialtyItemsGroup":
                 specialtyItemsTotal = event.detail.total;
                 break;
-            case "extraFeesGroup":
-                extraFeesTotal = event.detail.total;
+            case "testingFeesGroup":
+                testingFeesTotal = event.detail.total;
                 break;
             default:
                 break;
@@ -55,7 +55,7 @@
         <CalcRow row={data.demolitionGroup} rowGroup={'demolitionGroup'} on:rowTotalUpdated={handleTotal} />
         <CalcRow row={data.equipmentChargesGroup} rowGroup={'equipmentChargesGroup'} on:rowTotalUpdated={handleTotal} />
         <CalcRow row={data.specialtyItemsGroup} rowGroup={'specialtyItemsGroup'} on:rowTotalUpdated={handleTotal} />
-        <CalcRow row={data.extraFeesGroup} rowGroup={'extraFeesGroup'} on:rowTotalUpdated={handleTotal} />
+        <CalcRow row={data.testingFeesGroup} rowGroup={'testingFeesGroup'} on:rowTotalUpdated={handleTotal} />
         <h1 class="flex justify-center md:text-5xl text-2xl bold mb-20 mt-4 fixed top-0 right-0 p-4 bg-green-700 shadow-md shadow-black text-white z-20">Total: ${totalTotal}</h1>
     {:else}
         <Auth />
