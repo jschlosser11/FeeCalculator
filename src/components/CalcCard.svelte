@@ -147,7 +147,7 @@
             </button>
         {:else if btnClicked}
             <button on:click={removeAmountCalc(daysSelected)} class="block text-white hover:opacity-80 bg-red-600 rounded-md lg:mx-auto p-2 lg:mb-4 mb-10">
-                Delete
+                Remove
             </button>
         {/if}
     {:else}
